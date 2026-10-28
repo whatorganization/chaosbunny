@@ -50,7 +50,7 @@ public class ChaosBunny {
         Scanner scanner = new Scanner(System.in);
         
         while (true) {
-            System.out.println("--- Chaos Bunny Cipher ---");
+            System.out.println("--- ChaosBunny Cipher ---");
             System.out.println("1. Encrypt text");
             System.out.println("2. Decrypt text");
             System.out.println("3. Exit");
@@ -78,7 +78,7 @@ public class ChaosBunny {
                     System.out.println("Decrypted Text: " + decrypted + "\n");
                     
                 } else if (choice.equals("3")) {
-                    System.out.println("Exiting Chaos Bunny...");
+                    System.out.println("Exiting ChaosBunny...");
                     break;
                 } else {
                     System.out.println("Invalid option. Please enter 1, 2, or 3.\n");
