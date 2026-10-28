@@ -125,7 +125,7 @@ The loop maintains one logistic-map state in `x`. Each iteration first computes 
 
 The XOR operation has this property:
 
-$$A \oplus K \oplus K = A$$
+Because XOR is its own mathematical inverse ($A \oplus B = C$, and $C \oplus B = A$), the exact same function is used for both encryption and decryption.
 
 If encryption computes `ciphertext = plaintext ^ keystream`, then decryption computes `plaintext = ciphertext ^ keystream`. The keystream must be generated in exactly the same order, which is why both sides start with the same key-derived `x0` and `r` and advance once per byte.
 
