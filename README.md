@@ -18,6 +18,16 @@ At a high level, every operation follows the same sequence:
 6. XOR the input byte with that value.
 7. Base64-encode the resulting bytes for display during encryption.
 
+### What each operation means
+
+1. **Convert the key to bytes.** A text key is converted to UTF-8 so Java can process it as a sequence of numeric byte values. For example, the key `123` becomes the UTF-8 bytes for the characters `1`, `2`, and `3`.
+2. **Hash the key.** SHA-256 converts those key bytes into a fixed 32-byte digest. The digest is not used as the ciphertext. It is used as deterministic input for creating the logistic map parameters.
+3. **Create `x0` and `r`.** The program reads byte groups from the digest and converts them into two numbers: `x0`, the initial logistic-map state, and `r`, the control parameter that determines how chaotic the sequence becomes.
+4. **Generate the next chaotic state.** For every input byte, the program calculates `x = r * x * (1.0 - x)`. The updated `x` is different for each position, but the same key always produces the same sequence.
+5. **Create a keystream byte.** The updated floating-point value is multiplied by `100000000`, reduced with `% 256`, and cast to an integer. The resulting integer is stored in `keystreamByte`. This is the “value” mentioned in step 6: it is the byte-sized mask used to encrypt one input byte.
+6. **XOR the bytes.** The program combines the input byte with `keystreamByte`. For example, if the input byte is `67` (`01000011`) and the generated keystream byte is `173` (`10101101`), XOR produces `238` (`11101110`). The output byte is the encrypted form of that input byte.
+7. **Encode the output.** Encrypted bytes can contain values that are not printable text. Base64 converts the raw encrypted bytes into safe characters that can be displayed, copied, and entered again during decryption. Base64 is only an encoding step; it does not provide additional encryption.
+
 Decryption reverses the representation steps and repeats the same deterministic keystream generation. Since XOR is reversible, the same `processData` method can perform both directions.
 
 ## Mathematical Foundation: The Logistic Map
