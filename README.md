@@ -123,9 +123,7 @@ private static byte[] processData(byte[] data, String key) throws Exception {
 
 The loop maintains one logistic-map state in `x`. Each iteration first computes the next state, then turns it into one keystream byte. The input byte and keystream byte are XORed and written to the same position in `result`.
 
-The XOR operation has this property:
-
-Because XOR is its own mathematical inverse ($A \oplus B = C$, and $C \oplus B = A$), the exact same function is used for both encryption and decryption.
+Because XOR is its own mathematical inverse ($A \oplus B = C$, and $C \oplus B = A$), applying the same keystream byte a second time restores the original byte. This is why the exact same function can be used for both encryption and decryption.
 
 If encryption computes `ciphertext = plaintext ^ keystream`, then decryption computes `plaintext = ciphertext ^ keystream`. The keystream must be generated in exactly the same order, which is why both sides start with the same key-derived `x0` and `r` and advance once per byte.
 
