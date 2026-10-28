@@ -1,4 +1,4 @@
-# Chaos Bunny: The Chaotic Logistic Map Cipher
+# ChaosBunny Cipher
 
 ## Overview
 
@@ -94,8 +94,8 @@ The XOR operation frequently produces non-printable control characters. To allow
 Compile and run the cipher via the terminal:
 
 ```bash
-javac ChaoticLogisticCipher.java
-java ChaoticLogisticCipher
+javac ChaosBunny.java
+java ChaosBunny
 
 ```
 

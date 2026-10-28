@@ -3,7 +3,7 @@ import java.util.Base64;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class ChaoticLogisticCipher {
+public class ChaosBunny {
 
     private static double[] deriveKeyParameters(String key) throws Exception {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
